@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CIOB — Creative Digital Universe</title>
+  <meta name="description" content="CIOB — CREATIVE DIGITAL UNIVERSE. Un universo creativo que reúne proyectos digitales, experimentos y experiencias interactivas.">
+  <meta name="theme-color" content="#0b0714">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0714'/%3E%3Ccircle cx='22' cy='24' r='10' fill='%23ff3d9a'/%3E%3Ccircle cx='42' cy='24' r='10' fill='%23ffd23f'/%3E%3Ccircle cx='22' cy='44' r='10' fill='%2329e0ff'/%3E%3Ccircle cx='42' cy='44' r='10' fill='%23b6f23a'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <noscript><p style="padding:24px;font-family:sans-serif;color:#fff">CIOB necesita JavaScript / CIOB precisa de JavaScript.</p></noscript>
+
+  <!-- Barra superior: marca + idioma -->
+  <header class="topbar">
+    <button type="button" id="brand" class="brand" data-i18n-attr="aria-label:center;title:center">
+      <span class="brand-logo" aria-hidden="true"><b style="--lc:var(--pink)">C</b><b style="--lc:var(--yellow)">I</b><b style="--lc:var(--cyan)">O</b><b style="--lc:var(--lime)">B</b></span>
+      <em aria-hidden="true">CREATIVE DIGITAL UNIVERSE</em>
+    </button>
+    <div class="lang" role="group" data-i18n-attr="aria-label:lang">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="pt-BR" aria-pressed="false" lang="pt-BR">PT-BR</button>
+    </div>
+  </header>
+
+  <!-- Universo interactivo -->
+  <main id="universe" class="universe">
+    <div id="layers-back"></div>
+    <ul id="world" class="layer world" data-i18n-attr="aria-label:navLabel"></ul>
+    <div id="layers-front"></div>
+  </main>
+
+  <p id="hint" class="hint" data-i18n="hint"></p>
+  <nav id="dock" class="dock" data-i18n-attr="aria-label:navLabel"></nav>
+
+  <!-- Ficha del proyecto -->
+  <aside id="panel" class="panel" role="dialog" aria-labelledby="panel-title">
+    <div class="panel-art" id="panel-art"></div>
+    <button type="button" id="panel-close" class="icon-btn panel-close" data-i18n-attr="aria-label:close">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+    </button>
+    <div class="panel-body">
+      <div class="panel-meta"><span class="panel-num" id="panel-num" aria-hidden="true"></span><span class="chip" id="panel-cat"></span></div>
+      <h2 id="panel-title" tabindex="-1"></h2>
+      <p id="panel-desc" class="panel-desc"></p>
+      <div class="panel-actions">
+        <a id="panel-open" class="btn" target="_blank" rel="noopener noreferrer">
+          <span data-i18n="open"></span>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="pager">
+          <button type="button" id="prev" class="icon-btn" data-i18n-attr="aria-label:prev">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span id="panel-of" class="panel-of"></span>
+          <button type="button" id="next" class="icon-btn" data-i18n-attr="aria-label:next">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+      <p id="panel-url" class="panel-url"></p>
+    </div>
+  </aside>
+
+  <!-- Exploración completa: búsqueda + filtros -->
+  <section id="explore" class="explore" role="dialog" aria-modal="true" aria-labelledby="explore-title">
+    <div class="explore-head">
+      <h2 id="explore-title" data-i18n="exploreTitle"></h2>
+      <button type="button" id="explore-close" class="icon-btn" data-i18n-attr="aria-label:close">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="explore-tools">
+      <input id="q" type="search" autocomplete="off" spellcheck="false" data-i18n-attr="placeholder:search;aria-label:searchLabel">
+      <div id="chips" class="chips" role="group" data-i18n-attr="aria-label:filterLabel"></div>
+    </div>
+    <p id="explore-count" class="explore-count" aria-live="polite"></p>
+    <ul id="explore-grid" class="explore-grid"></ul>
+  </section>
+
+  <!-- Entrada cinematográfica -->
+  <section id="intro" class="intro" aria-label="CIOB">
+    <div class="bands" aria-hidden="true">
+      <i style="--i:0;--bc:var(--pink)"></i><i style="--i:1;--bc:var(--orange)"></i><i style="--i:2;--bc:var(--yellow)"></i>
+      <i style="--i:3;--bc:var(--lime)"></i><i style="--i:4;--bc:var(--cyan)"></i><i style="--i:5;--bc:var(--violet)"></i>
+    </div>
+    <div class="pulses" aria-hidden="true">
+      <b style="--i:0;--c:var(--pink)"></b><b style="--i:1;--c:var(--cyan)"></b><b style="--i:2;--c:var(--yellow)"></b>
+    </div>
+    <div class="orbit" aria-hidden="true">
+      <i style="--a:0deg;--c:var(--yellow);--w:18px;--br:50%"></i>
+      <i style="--a:72deg;--c:var(--pink);--w:14px;--br:3px"></i>
+      <i style="--a:144deg;--c:var(--cyan);--w:20px;--br:50%"></i>
+      <i style="--a:216deg;--c:var(--lime);--w:14px;--br:3px"></i>
+      <i style="--a:288deg;--c:var(--orange);--w:16px;--br:50%"></i>
+    </div>
+    <div class="intro-core">
+      <h1 class="logo" aria-label="CIOB">
+        <span aria-hidden="true" style="--i:0;--lc:var(--pink);--ls:var(--violet)">C</span><span aria-hidden="true" style="--i:1;--lc:var(--yellow);--ls:var(--orange)">I</span><span aria-hidden="true" style="--i:2;--lc:var(--cyan);--ls:var(--violet)">O</span><span aria-hidden="true" style="--i:3;--lc:var(--lime);--ls:var(--cyan)">B</span>
+      </h1>
+      <p class="sub">CREATIVE DIGITAL UNIVERSE</p>
+      <p class="slogan" data-i18n="slogan"></p>
+    </div>
+    <button type="button" id="skip" class="skip" data-i18n="skip"></button>
+    <button type="button" id="enter" class="enter"><span data-i18n="enter"></span><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </section>
+
+  <script src="projects.js"></script>
+  <script src="art.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
